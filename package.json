@@ -1,0 +1,16 @@
+{
+  "name": "microservices_1.0",
+  "version": "1.0.0",
+  "description": "This project demonstrates a simple microservices architecture using Node.js and Express. It includes three small services:",
+  "main": "order-service.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.21.0",
+    "express": "^5.3.0"
+  }
+}
