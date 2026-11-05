@@ -4,8 +4,8 @@
   "description": "This project demonstrates a simple microservices architecture using Node.js and Express. It includes three small services:",
   "main": "order-service.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "node tests/smoke-test.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
