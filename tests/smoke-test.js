@@ -1,4 +1,7 @@
+
 const http = require('http');
+
+const baseUrl = process.env.TEST_BASE_URL || 'http://localhost';
 
 const services = [
     {
@@ -21,13 +24,14 @@ const services = [
 function testService(service) {
     return new Promise((resolve) => {
         http.get(
-            `http://localhost:${service.port}${service.path}`,
+            `${baseUrl}:${service.port}${service.path}`,
             (res) => {
                 console.log(
                     `${service.name}: HTTP ${res.statusCode}`
                 );
 
                 resolve(res.statusCode === 200);
+                res.resume();
             }
         ).on('error', (error) => {
             console.error(
