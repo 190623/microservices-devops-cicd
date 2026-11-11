@@ -2,31 +2,35 @@
 pipeline {
     agent any
 
+    environment {
+        TEST_BASE_URL = 'http://host.docker.internal'
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                echo 'Source code is checked out from GitHub.'
+                echo 'Checking out source code from GitHub.'
                 checkout scm
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                echo 'Installing Node.js dependencies...'
+                sh 'npm install'
             }
         }
 
         stage('Test Microservices') {
             steps {
-                echo 'Running smoke tests...'
-
-                sh '''
-                    docker run --rm \
-                    -e TEST_BASE_URL=http://host.docker.internal \
-                    -v "$WORKSPACE:/app" \
-                    -w /app \
-                    node:20-alpine npm test
-                '''
+                echo 'Running microservices smoke tests...'
+                sh 'npm test'
             }
         }
 
         stage('Build Docker Images') {
             steps {
-                echo 'Building microservice images...'
+                echo 'Building microservice Docker images...'
 
                 sh '''
                     docker build -t user-service:latest -f Dockerfile.user .
